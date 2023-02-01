@@ -1,6 +1,7 @@
 // Find the 'Avanti' button
 const nav = document.querySelector('.course-navigation');
 const nextButton = nav.getElementsByTagName('button')[1];
+var video = document.querySelector('.fp-engine');
 
 // Convert time from HH:MM into seconds
 const convertTime = (string) => {
@@ -8,6 +9,16 @@ const convertTime = (string) => {
 	var duration = Number(spl[0]) * 60 + Number(spl[1]);
 	return duration;
 } 
+
+// Check if the video has changed and re-run the program.
+const videoChanged = () => {
+	newVid = document.querySelector('.fp-engine');
+	if (video.getAttribute("src") != newVid.getAttribute("src")) {
+		console.log("Video changed. Re-running program.");
+		video = newVid;
+		performAction();
+	}
+}
 
 // Main function
 const performAction = () => {
@@ -33,7 +44,7 @@ const performAction = () => {
 	}, waitTime * 1000);
 };
 
-// Rerun performAction every time the 'Avanti' button is clicked.
-nextButton.addEventListener("click", () => {setTimeout(performAction, 5000);})
+// Check if the video has changed every minute.
+setInterval(videoChanged, 60000);
 
 performAction();
