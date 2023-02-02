@@ -47,7 +47,7 @@ const performAction = () => {
 	}, waitTime * 1000);
 };
 
-// Check if the video has changed every minute.
+// Check every minute if the video has changed.
 setInterval(videoChanged, 60000);
 
 performAction();
