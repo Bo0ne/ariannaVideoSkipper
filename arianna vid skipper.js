@@ -26,7 +26,7 @@ const performAction = () => {
 	video.addEventListener('ended', () => {
 		console.log('Video ended! Clicking button.')
 		nextButton.click()
-		})
+		}, { once: true })
 };
 
 // Check every minute if the video has changed.
