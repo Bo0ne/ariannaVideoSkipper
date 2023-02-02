@@ -1,6 +1,7 @@
 // Find the 'Avanti' button
-const nav = document.querySelector('.course-navigation');
+nav = document.querySelector('.course-navigation');
 const nextButton = nav.getElementsByTagName('button')[1];
+// Find the video element
 var video = document.querySelector('.fp-engine');
 
 // Convert time from HH:MM into seconds
@@ -12,7 +13,9 @@ const convertTime = (string) => {
 
 // Check if the video has changed and re-run the program.
 const videoChanged = () => {
+	// Find the new video element
 	newVid = document.querySelector('.fp-engine');
+	// Check if the source of the video has changed
 	if (video.getAttribute("src") != newVid.getAttribute("src")) {
 		console.log("Video changed. Re-running program.");
 		video = newVid;
@@ -39,7 +42,7 @@ const performAction = () => {
 	console.log('Setting a timer for ' + waitTime + ' seconds.');
 
 	setTimeout(() => {
-		console.log('Timer done! Clicking button.');
+		console.log(waitTime + 's timer done! Clicking button.');
 		nextButton.click();
 	}, waitTime * 1000);
 };
