@@ -13,7 +13,7 @@ function videoChanged () {
 		if (newVid == null) throw 'Cannot find video!';
 		// Check if the source of the video has changed
 		if (video.getAttribute("src") != newVid.getAttribute("src")) {
-			console.log("Video changed. Waiting for new video to end.");
+			console.log("Video changed. Waiting for the new video to end.");
 			video = newVid;
 			performAction();
 		}
