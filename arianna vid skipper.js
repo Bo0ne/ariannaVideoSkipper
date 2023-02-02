@@ -32,6 +32,6 @@ function performAction () {
 };
 
 // Check every minute if the video has changed.
-setInterval(videoChanged, 10000);
+setInterval(videoChanged, 60000);
 
 performAction();
