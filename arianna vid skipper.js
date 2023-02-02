@@ -4,47 +4,29 @@ const nextButton = nav.getElementsByTagName('button')[1];
 // Find the video element
 var video = document.querySelector('.fp-engine');
 
-// Convert time from HH:MM into seconds
-const convertTime = (string) => {
-	spl = string.split(':');
-	var duration = Number(spl[0]) * 60 + Number(spl[1]);
-	return duration;
-} 
-
 // Check if the video has changed and re-run the program.
 const videoChanged = () => {
-	// Find the new video element
-	newVid = document.querySelector('.fp-engine');
-	// Check if the source of the video has changed
-	if (video.getAttribute("src") != newVid.getAttribute("src")) {
-		console.log("Video changed. Re-running program.");
-		video = newVid;
-		performAction();
+	try {
+		// Find the new video element
+		newVid = document.querySelector('.fp-engine');
+		if (newVid == null) throw 'Cannot find video!';
+		// Check if the source of the video has changed
+		if (video.getAttribute("src") != newVid.getAttribute("src")) {
+			console.log("Video changed. Waiting for new video to end.");
+			video = newVid;
+			performAction();
+		}
+	} catch (ignored) {
+		alert('Cannot find a video! Refresh the page if you want to stop the program.');
 	}
 }
 
 // Main function
 const performAction = () => {
-	// Find the duration on the video
-	durationElement = document.querySelector('.fp-duration');
-	durationtxt = durationElement.innerText;
-	var duration = convertTime(durationtxt);
-	
-	// Find the elapsed time of the video
-	elapsedElement = document.querySelector('.fp-elapsed');
-	elapsedtxt = elapsedElement.innerText;
-	var elapsed = convertTime(elapsedtxt);
-	
-	console.log('Found a ' + durationtxt + ' long video. Resuming playing at '+ elapsedtxt);
-
-	// Find for how long to set the timer for
-	var waitTime = duration - elapsed;
-	console.log('Setting a timer for ' + waitTime + ' seconds.');
-
-	setTimeout(() => {
-		console.log(waitTime + 's timer done! Clicking button.');
-		nextButton.click();
-	}, waitTime * 1000);
+	video.addEventListener('ended', () => {
+		console.log('Video ended! Clicking button.')
+		nextButton.click()
+		})
 };
 
 // Check every minute if the video has changed.
