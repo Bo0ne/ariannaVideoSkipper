@@ -1,3 +1,4 @@
+const mp3_url = 'https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3';
 // Find the 'Avanti' button
 nav = document.querySelector('.course-navigation');
 const nextButton = nav.getElementsByTagName('button')[1];
@@ -5,7 +6,7 @@ const nextButton = nav.getElementsByTagName('button')[1];
 var video = document.querySelector('.fp-engine');
 
 // Check if the video has changed and re-run the program.
-const videoChanged = () => {
+function videoChanged () {
 	try {
 		// Find the new video element
 		newVid = document.querySelector('.fp-engine');
@@ -17,12 +18,13 @@ const videoChanged = () => {
 			performAction();
 		}
 	} catch (ignored) {
-		alert('Cannot find a video! Refresh the page if you want to stop the program.');
+		(new Audio(mp3_url)).play();
+		console.log('Cannot find a video! Refresh the page if you want to stop the program.');
 	}
 }
 
 // Main function
-const performAction = () => {
+function performAction () {
 	video.addEventListener('ended', () => {
 		console.log('Video ended! Clicking button.')
 		nextButton.click()
@@ -30,6 +32,6 @@ const performAction = () => {
 };
 
 // Check every minute if the video has changed.
-setInterval(videoChanged, 60000);
+setInterval(videoChanged, 10000);
 
 performAction();
